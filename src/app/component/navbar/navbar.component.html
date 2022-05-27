@@ -1,7 +1,7 @@
 <body>
 
     <!-- NAVBAR -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
 
             <a class="navbar-brand" routerLink="home">GjejPune</a>
@@ -13,14 +13,6 @@
                         <a class="nav-link active" aria-current="page">Punet</a>
                     </li>
 
-
-                    <li class="nav-item">
-                        <a class="nav-link">Me Pagese</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link">Me Kembim</a>
-                    </li>
 
                     <li *ngIf="isAdmin()" class="nav-item">
                         <a class="nav-link" routerLink="admin">Admin</a>
@@ -119,9 +111,9 @@
                     </div>
 
                     <div class="col-auto mt-3">
-                        <label for="inputImage" class="visually-hidden">Image</label>
+                        <label for="inputImage mr-3" >Ngarko imazh .</label>
                         <input type="file" id="inputImage" name="file" accept="image/jpeg"
-                            (change)="onFileSelect($event)" placeholder="Image" />
+                            (change)="onFileSelect($event)" placeholder="Image" title=" "/>
                     </div>
 
                     <div class="col-auto mt-3">

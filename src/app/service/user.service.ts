@@ -1,7 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Job } from '../model/job';
 import { User } from '../model/user';
 import { AuthenticationService } from './authentication.service';
 
@@ -13,9 +14,16 @@ export class UserService {
 
   baseUrl = "http://localhost:8080/user"
   
+  user:User = new User()
   
-  constructor(private httpService:HttpClient,private authService:AuthenticationService,private router:Router) { }
+  constructor(private httpService:HttpClient,private authService:AuthenticationService) { }
+  
 
+  
+
+  getLoggedUser():User{
+    return this.user
+  }
   
   isLoggedIn():boolean{
     if (this.authService.isLoggedIn()){
@@ -53,6 +61,8 @@ export class UserService {
             this.authService.saveRoleName(res.user.roles[0].roleName)
 
             this.authService.saveUserName(res.user.userName)
+
+            
     
             if (res.user.roles[0].roleName === "ADMIN") {
               console.log("logged as admin");
@@ -70,15 +80,18 @@ export class UserService {
 
   }
 
-  getUserByUserName():Observable<User>{
+  getUserByUserName(){
 
     let userName = this.authService.getUserName()
     let param = "userName="+userName
-    return this.httpService.get<User>(this.baseUrl+ "/getProfile?" + param)
+    return this.httpService.get<User>(this.baseUrl+ "/getProfile?" + param).subscribe(res =>{
+      this.user = res
+    })
   }
  
   
   logout(){
+    
     this.authService.clearAll()
     console.log("logged out");
     
@@ -87,11 +100,7 @@ export class UserService {
   registerUser(name:string,imgFile:File,email:string,userName:string,userPassword:string){
 
     let userData = { "name":name, "email":email, "userName": userName, "userPassword": userPassword }
-  
 
-
-    
-    
     let input = new FormData();
     
     input.append('imgFile', imgFile);
@@ -116,6 +125,8 @@ export class UserService {
     })
 
   }
+
+
 
   
 }

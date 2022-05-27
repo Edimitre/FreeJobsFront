@@ -1,1 +1,17 @@
 
+<div class="col">
+    <div class="card" *ngFor="let job of jobList">
+      <div class="card-header">
+        {{job.name}}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{job.value}}</h5>
+        <p class="card-text">{{job.description}}</p>
+        
+        <div class="container" *ngFor="let item of job.itemList">
+          <div class="card-text text-center">{{item.name}}</div>
+        </div>
+
+      </div>
+    </div>
+  </div>

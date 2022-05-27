@@ -1,4 +1,7 @@
 import { Role } from "./role"
+import { Job } from './job';
+import { Item } from "./item";
+
 
 export class User {
 
@@ -10,6 +13,8 @@ export class User {
     userImage:any
     joinedDate!:Date
     roles!:Role[]
+    jobItems!:Item[]
+    jobList!:Job[]
     isActive!:boolean
     isLocked!:boolean
 }

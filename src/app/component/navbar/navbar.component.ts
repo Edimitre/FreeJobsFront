@@ -79,8 +79,6 @@ export class NavbarComponent implements OnInit {
 
       this.imgFile = event.target.files[0]
 
-      console.log(this.imgFile.type);
-
 
     }
   }

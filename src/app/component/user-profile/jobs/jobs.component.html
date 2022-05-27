@@ -1,0 +1,105 @@
+<div class="container">
+    <div class="row row-cols-2">
+        <div class="col" *ngFor="let job of jobList">{{job.name}}</div>
+
+
+    </div>
+</div>
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerJobModal">
+    AddJob
+</button>
+
+
+
+
+
+<!-- Modal Register-->
+<div class="modal fade" id="registerJobModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Shto Pune</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <!-- modal form  -->
+                <form class="row g-3">
+
+                    <div class="mb-3">
+                        <label for="jobName" class="form-label">Emri</label>
+                        <input type="email" class="form-control" id="jobName" placeholder="name" [(ngModel)]="job.name"
+                            name="jobName">
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="jobDescription" class="form-label">Pershkrimi</label>
+                        <textarea class="form-control" id="jobDescription" rows="3" [(ngModel)]="job.description"
+                            name="jobDescription" placeholder="pershkrimi"></textarea>
+                    </div>
+
+                    <div class="container">
+                        
+                         <p class="text text-center">Zgjidh llojin e punes</p>
+                        
+                    </div>
+                    
+                    
+                    <div class="form-check form-check-inline" *ngFor="let jt of jobTypesList">
+                        <input class="form-check-input" type="radio" id="inlineCheckbox1" (change)="selectJobType($event)" value="{{jt.name}}" name="jobTypeName">
+                        <label class="form-check-label" for="inlineCheckbox1">{{jt.name}}</label>
+                    </div>
+
+                    <div class="mb-3" *ngIf="jobHasPayment(jobType)">
+                        <label for="inputValue" class="form-label">Vlera</label>
+                        <input type="number" step="0.1" class="form-control" id="inputValue" placeholder="vlera" name="jobTypeValue" [(ngModel)]="job.value">
+                    </div>
+                    
+                    <div class="mb-3 text-center" *ngIf="!jobHasPayment(jobType)">
+                        <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#addItemModal">Shto nje send</button>
+                      </div>
+
+
+                </form>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mbyll</button>
+                <button type="button" class="btn btn-primary" (click)="saveJob()" data-bs-dismiss="modal">Shto</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal Add Item To Job who Is Being created-->
+<div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Zgjidh Sendin</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+
+            <select class="form-select" aria-label="Default select example">
+                <option selected>Zgjidh sendin</option>
+                <option value="{{item.name}}" *ngFor="let item of itemList" (click)="selectItem($event)">{{item.name}}</option>
+                
+              </select>
+
+         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mbyll</button>
+          <button type="button" class="btn btn-primary" (click)="addItemToJob(item)">Shto</button>
+        </div>
+      </div>
+    </div>
+  </div>

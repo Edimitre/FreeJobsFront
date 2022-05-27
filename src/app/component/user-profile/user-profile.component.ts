@@ -1,6 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../service/user.service';
 import { User } from '../../model/user';
+import { Job } from '../../model/job';
+import { Item } from 'src/app/model/item';
+
+
+
+
+
+
+
 
 @Component({
   selector: 'app-user-profile',
@@ -9,32 +18,28 @@ import { User } from '../../model/user';
 })
 export class UserProfileComponent implements OnInit {
 
-  
-  constructor(private userService:UserService) { }
+  job: Job = new Job()
+  user: User = new User()
+  jobitem: Item = new Item()
 
-  user:User = new User()
+
   
-  
-  
+  constructor(private userService: UserService) { }
+
+
+
+
+
+
   ngOnInit(): void {
 
-    this.loadUser()
-    
-    
-  }
+    this.userService.getUserByUserName()
+    this.user = this.userService.user
 
-  loadUser(){
-
-    
-    this.userService.getUserByUserName().subscribe(res=>{
-      this.user = res
-      
-
-      
-    })
 
   }
-
 
 
 }
+
+

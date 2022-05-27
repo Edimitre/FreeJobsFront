@@ -16,6 +16,10 @@ import { AuthGuard } from './service/auth.guard';
 import { AdminComponent } from './component/admin/admin.component';
 import { UserProfileComponent } from './component/user-profile/user-profile.component';
 import { ByPassSecurityPipe } from './pipes/by-pass-security.pipe';
+import { JobService } from './service/job.service';
+import { JobsComponent } from './component/user-profile/jobs/jobs.component';
+import { ItemsComponent } from './component/user-profile/items/items.component';
+import { ItemService } from './service/item.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +29,9 @@ import { ByPassSecurityPipe } from './pipes/by-pass-security.pipe';
     NavbarComponent,
     AdminComponent,
     UserProfileComponent,
-    ByPassSecurityPipe
+    ByPassSecurityPipe,
+    JobsComponent,
+    ItemsComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +47,9 @@ import { ByPassSecurityPipe } from './pipes/by-pass-security.pipe';
       useClass:AuthInterceptor,
       multi:true
     },
-    UserService
+    UserService,
+    JobService,
+    ItemService
   ],
   bootstrap: [AppComponent]
 })
